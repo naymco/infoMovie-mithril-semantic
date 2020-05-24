@@ -1,5 +1,5 @@
 // Datos
-import {api_get} from "../data/utils.js";
+import {api_get, Icono} from "../data/utils.js";
 
 
 const LandPage = () => {
@@ -31,31 +31,26 @@ const LandPage = () => {
                                 ]),
                                 m(".ui.bottom.green.attached.button", "More info")
                             ])
-
-                            // m(".card",
-                            //     m(".image", m("img", {src: `https://image.tmdb.org/t/p/w200/${movie.poster_path}`})),
-                            //     m(".content", [
-                            //         m(".header", movie.title),
-                            //         m(".description", movie.overview)
-                            //     ])
-                            // )])
                         })
                     )],
+                // Paginación a partir de aquí.
                 m(".ui.label", data.total_pages),
-                m(".ui.label", page),
-                page > 1 ? m("a.ui.button", {
+                m(".ui.label",{
+                    style: "margin: 20px;",
+                }, page),
+                page > 1 ? m("a.ui.red.button", {
                     onclick: () => {
                         page--;
                         load();
                     }
-                }, "menos") : null,
-                data.total_pages > 20 * page ? m("a.ui.button", {
+                }, m("i.icon.arrow.left"), ` ${page-1} :Anterior`) : null,
+                data.total_pages > 20 * page ? m("a.ui.green.button", {
                     onclick: () => {
                         page++;
                         console.log(page)
                         load();
                     }
-                }, "más") : null
+                }, m(`i.icon.arrow.right`), ` Siguiente: ${page+1}`) : null
             )
         }
     }
