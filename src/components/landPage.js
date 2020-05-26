@@ -1,5 +1,5 @@
 // Datos
-import {api_get, Icono} from "../data/utils.js";
+import {api_get} from "../data/utils.js";
 
 
 const LandPage = () => {
@@ -19,7 +19,7 @@ const LandPage = () => {
             load();
         },
         view: (vnode) => {
-            console.log(data)
+            // console.log(data)
             return m(".ui.container", m("h1.ui.h1", "infoMovie"), [
                     m(".ui.four.doubling.cards",
                         movies.map(movie => {
@@ -34,23 +34,27 @@ const LandPage = () => {
                         })
                     )],
                 // Paginación a partir de aquí.
-                m(".ui.label", data.total_pages),
-                m(".ui.label",{
+                m(".ui.label", `Páginas totales: ${data.total_pages}`),
+                m(".ui.label", {
                     style: "margin: 20px;",
-                }, page),
+                }, `Página: ${page}`),
                 page > 1 ? m("a.ui.red.button", {
+                    href: `./index.html#!/${page - 1}`,
                     onclick: () => {
                         page--;
                         load();
+                        window.scrollTo({ top: 0, behavior: 'smooth'}) // efecto muy interesante
                     }
-                }, m("i.icon.arrow.left"), ` ${page-1} :Anterior`) : null,
+                }, m("i.icon.arrow.left"), ` ${page - 1} :Anterior`) : null,
                 data.total_pages > 20 * page ? m("a.ui.green.button", {
+                    href: `./index.html#!/${page + 1}`,
                     onclick: () => {
                         page++;
-                        console.log(page)
                         load();
+                        window.scrollTo({ top: 0, behavior: 'smooth'})
+
                     }
-                }, m(`i.icon.arrow.right`), ` Siguiente: ${page+1}`) : null
+                }, m(`i.icon.arrow.right`), ` Siguiente: ${page + 1}`) : null
             )
         }
     }

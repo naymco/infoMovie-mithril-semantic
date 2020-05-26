@@ -1,6 +1,8 @@
 // Función para conectar a una api, similar a axios pero de creación propia de mi empresa
 function api_get(url, method = "GET", data = {}) {
-    var publicAPI = function(xhr) {xhr.withCredentials = false;}
+    var publicAPI = function (xhr) {
+        xhr.withCredentials = false;
+    }
     return m.request({
         method: method,
         url: url,
