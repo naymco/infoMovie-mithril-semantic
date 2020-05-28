@@ -41,7 +41,7 @@ const Menu = () => {
 
                 ])
             ], m("main", vnode.children.map(child => {
-                console.log(vnode)
+                // console.log(vnode)
                 return m(child, vnode.attrs)
             })))
         }
