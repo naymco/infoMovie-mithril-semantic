@@ -56,18 +56,32 @@ const LandPage = () => {
           listado.map((result) => {
             return m(".card", [
               result.poster_path
-                ? m("img", {
-                    src: `https://image.tmdb.org/t/p/w200/${result.poster_path}`,
-                  })
-                : m("img", {
-                    src:
-                      "https://vignette.wikia.nocookie.net/diamondnoace/images/6/6d/No_image.png/revision/latest/scale-to-width-down/340?cb=20160808012100",
-                    style: "height: 350px; width: 100%;",
-                  }),
+                ? m(
+                    ".image",
+                    m("img", {
+                      src: `https://image.tmdb.org/t/p/w200/${result.poster_path}`,
+                    })
+                  )
+                : m(
+                    ".image",
+                    m("img", {
+                      src:
+                        "https://vignette.wikia.nocookie.net/diamondnoace/images/6/6d/No_image.png/revision/latest/scale-to-width-down/340?cb=20160808012100",
+                    })
+                  ),
+
               m(".content", [
-                m(".header", result.title),
-                m(".description", result.overview),
+                result.title
+                  ? m(".header", result.title)
+                  : m(".header", result.name || "No results found"),
+                result.overview
+                  ? m(".description", result.overview)
+                  : m(
+                      ".description",
+                      "We have not found any results on this film."
+                    ),
               ]),
+
               m(".ui.bottom.green.attached.button", "More info"),
             ]);
           })
