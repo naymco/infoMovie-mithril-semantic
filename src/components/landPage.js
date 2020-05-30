@@ -3,6 +3,9 @@ import { api_get } from "../data/utils.js";
 // Selectors
 import { Input } from "./selectors/Input.js";
 
+// Components
+import { Modal } from "./Modal.js";
+
 const LandPage = () => {
   let movies = [];
   let page = 1;
@@ -22,6 +25,7 @@ const LandPage = () => {
   let valueSearch = null;
   let listado = [];
   let movieDetail = null;
+  let on = false;
 
   return {
     oninit: async (vnode) => {
@@ -86,7 +90,7 @@ const LandPage = () => {
                         ),
                   ]),
 
-                  m(".ui.bottom.green.attached.button", "More info"),
+                  m(Modal, { movie: result }),
                 ]);
               })
             )
@@ -106,22 +110,7 @@ const LandPage = () => {
                     m(".header", movie.title),
                     m(".description", movie.overview),
                   ]),
-                  m(
-                    ".ui.bottom.green.attached.button",
-                    {
-                      onclick: (event) => {
-                        api_get(
-                          `https://api.themoviedb.org/3/movie/${movie.id}?api_key=e57408e326e739e92dd69004e24bd6e6&language=en-US`
-                        )
-                          .then((detail) => {
-                            movieDetail = detail;
-                            console.log(movieDetail);
-                          })
-                          .catch((error) => console.log(error));
-                      },
-                    },
-                    "More info"
-                  ),
+                  m(Modal, { movie: movie }),
                 ]);
               })
             ),
