@@ -99,19 +99,21 @@ const LandPage = () => {
               movies.map((movie) => {
                 // console.log(movie);
                 // console.log(movies);
-                return m(".card", [
-                  m(
-                    ".image",
-                    m("img", {
-                      src: `https://image.tmdb.org/t/p/w200/${movie.poster_path}`,
-                    })
-                  ),
-                  m(".content", [
-                    m(".header", movie.title),
-                    m(".description", movie.overview),
+                return [
+                  m(".card", [
+                    m(
+                      ".image",
+                      m("img", {
+                        src: `https://image.tmdb.org/t/p/w200/${movie.poster_path}`,
+                      })
+                    ),
+                    m(".content", [
+                      m(".header", movie.title),
+                      m(".description", movie.overview),
+                    ]),
+                    m(Modal, { movie: movie }),
                   ]),
-                  m(Modal, { movie: movie }),
-                ]);
+                ];
               })
             ),
         // Paginación a partir de aquí.

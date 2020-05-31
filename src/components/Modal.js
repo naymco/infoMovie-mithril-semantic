@@ -44,11 +44,29 @@ const Modal = () => {
                     ".image.content",
                     m(
                       ".ui.massive.image",
-                      m("img", {
-                        src: `https://image.tmdb.org/t/p/w200/${movie.poster_path}`,
-                      })
+                      movieDetail
+                        ? m("img", {
+                            src: `https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movieDetail.poster_path}`,
+                          })
+                        : m("img", {
+                            src:
+                              "https://vignette.wikia.nocookie.net/diamondnoace/images/6/6d/No_image.png/revision/latest/scale-to-width-down/340?cb=20160808012100",
+                          })
                     ),
-                    m(".description", m("p", movie.overview))
+                    movieDetail
+                      ? m(".description", [
+                          m("h3", movieDetail.tagline),
+                          m("p", movieDetail.release_date),
+                          m("p", movieDetail.overview),
+                        ])
+                      : m(".description", { style: "width: 100%;" }, [
+                          m(
+                            ".ui.active.inverted.dimmer",
+                            m(".ui.small.text.loader", "Loading...")
+                          ),
+                          m("p"),
+                          m("p"),
+                        ])
                   ),
 
                   m(
